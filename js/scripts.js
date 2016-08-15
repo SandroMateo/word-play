@@ -1,16 +1,15 @@
 var sentence = [];
 var newSentence = [];
 
+function wordLength(word) {
+  return word.length >= 3;
+}
+
 $(function() {
   $("form").submit(function(event) {
     sentence = $("input").val().split(/[\s,.!?]+/);
-    sentence.forEach(function(word) {
-      if(word.length >= 3) {
-        newSentence.push(word);
-      };
-    });
-    var reversed = newSentence.reverse().join(" ");
-    $("#story").text(reversed + ".");
+    newSentence = sentence.filter(wordLength).reverse().join(" ");
+    $("#story").text(newSentence + ".");
     event.preventDefault();
   });
 });
